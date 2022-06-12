@@ -10,4 +10,8 @@ class Poker
         file = File.read('./hands.json')
         data_hash = JSON.parse(file)
     end
+
+    def check_hand(hand)
+        1
+    end
 end
