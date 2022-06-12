@@ -18,6 +18,8 @@ class Poker
             2
         elsif full_house(hand)
             3
+        elsif flush(hand)
+            4
         end
     end
 
@@ -57,6 +59,10 @@ class Poker
         else 
             return false
         end
+    end
+
+    def flush(hand)
+        hand.count { | card | card[:suit] == hand.first[:suit] }
     end
 
     private

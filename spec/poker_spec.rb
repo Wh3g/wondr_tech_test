@@ -30,8 +30,8 @@ describe Poker do
             expect(subject.check_hand(@example_hands[2])).to eq 3
         end
 
-        # it "checks flush" do
-        #     expect(subject.check_hand(@example_hands[3])).to eq 4
-        # end 
+        it "checks flush" do
+            expect(subject.check_hand(@example_hands[3])).to eq 4
+        end 
     end
 end
