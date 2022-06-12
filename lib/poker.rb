@@ -24,12 +24,13 @@ class Poker
     end
 
     def straight_flush(hand)
-        suit = hand[0][:suit]
+        
         sorted_hand = sort_hand(hand)
+        unless flush(sorted_hand)
+            return false
+        end
         sorted_hand.length.times do | index |
-            if sorted_hand[index][:suit] != suit
-                return false
-            elsif sorted_hand[index][:value] != (sorted_hand[index - 1][:value] + 1) && index != 0
+            if sorted_hand[index][:value] != (sorted_hand[index - 1][:value] + 1) && index != 0
                 sorted_hand[index][:value]
                 sorted_hand[index - 1][:value]
                 return false
