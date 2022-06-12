@@ -14,10 +14,10 @@ class Poker
     def check_hand(hand)
         if straight_flush(hand)
             1
-        elsif num_of_a_kind(hand)
+        elsif num_of_a_kind(hand, 4)
             2
-        # elsif full_house(hand)
-        #     3
+        elsif full_house(hand)
+            3
         end
     end
 
@@ -36,27 +36,28 @@ class Poker
         return true
     end
 
-    def num_of_a_kind(hand)
+    def num_of_a_kind(hand, num, value = nil)
         hand.each do | card |
-            value = card[:value]
-            if hand.count { |cards| cards[:value] == value} == 4
+            if value == nil
+                value = card[:value]
+            end
+            if hand.count { |cards| cards[:value] == value} == num
                 return true
             end
         end
         false
     end
 
-    # def full_house(hand)
-    #     sorted_hand = sort_hand(hand)
-    #     if num_of_a_kind(sorted_hand, 3, sorted_hand.first[:value]) && num_of_a_kind(sorted_hand, 2, sorted_hand.last[:value])
-    #         p "hi"
-    #         return true
-    #     elsif num_of_a_kind(sorted_hand, 2, sorted_hand.last[:value]) && num_of_a_kind(sorted_hand, 3, sorted_hand.last[:value])
-    #         return true
-    #     else 
-    #         return false
-    #     end
-    # end
+    def full_house(hand)
+        sorted_hand = sort_hand(hand)
+        if num_of_a_kind(sorted_hand, 3, sorted_hand.first[:value]) && num_of_a_kind(sorted_hand, 2, sorted_hand.last[:value])
+            return true
+        elsif num_of_a_kind(sorted_hand, 2, sorted_hand.last[:value]) && num_of_a_kind(sorted_hand, 3, sorted_hand.last[:value])
+            return true
+        else 
+            return false
+        end
+    end
 
     private
     def sort_hand(hand)
